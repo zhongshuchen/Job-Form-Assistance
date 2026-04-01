@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Application Assistant</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <div id="app">
+    <header class="sidebar-header">
+      <h1 data-i18n="appTitle">Job Assistant</h1>
+      <div class="header-actions">
+        <button id="close-sidebar" class="btn-icon" title="Close">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <button id="add-group" class="btn btn-secondary">
+        <span class="icon-plus"></span> <span data-i18n="newGroup">New Group</span>
+      </button>
+      <button id="toggle-date-format" class="btn btn-text">
+        <span data-i18n="dateFormat">Date:</span> <span id="date-format-text">YYYY-MM-DD</span>
+      </button>
+    </div>
+
+    <div id="groups-container" class="groups-container">
+      <!-- Groups and materials will be rendered here -->
+    </div>
+
+    <div id="empty-state" class="empty-state hidden">
+      <p data-i18n="emptyState">No materials yet. Create your first group and material!</p>
+    </div>
+  </div>
+
+  <!-- Modal for creating/editing materials -->
+  <div id="material-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title" data-i18n="newMaterial">New Material</h2>
+        <button class="btn-icon modal-close" title="Close">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="material-content" data-i18n="content">Content</label>
+          <textarea id="material-content" rows="6" data-i18n-placeholder="contentPlaceholder"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="material-label" data-i18n="label">Label (optional)</label>
+          <input type="text" id="material-label" data-i18n-placeholder="labelPlaceholder">
+          <small class="help-text" data-i18n="labelHelp">Shown as small text at top-left</small>
+        </div>
+        <div class="form-group">
+          <label for="material-group" data-i18n="group">Group</label>
+          <select id="material-group"></select>
+        </div>
+        <div class="form-group" id="classification-group">
+          <label data-i18n="detectedType">Detected Type</label>
+          <span id="detected-type" class="detected-type" data-i18n="typeText">Text</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="delete-material" class="btn btn-danger hidden" data-i18n="delete">Delete</button>
+        <button class="btn btn-secondary modal-close" data-i18n="cancel">Cancel</button>
+        <button id="save-material" class="btn btn-primary" data-i18n="save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for creating/editing groups -->
+  <div id="group-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="group-modal-title" data-i18n="newGroupTitle">New Group</h2>
+        <button class="btn-icon modal-close" title="Close">
+          <span class="icon-close"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="group-name" data-i18n="groupName">Group Name</label>
+          <input type="text" id="group-name" data-i18n-placeholder="groupNamePlaceholder">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="delete-group" class="btn btn-danger hidden" data-i18n="delete">Delete</button>
+        <button class="btn btn-secondary modal-close" data-i18n="cancel">Cancel</button>
+        <button id="save-group" class="btn btn-primary" data-i18n="save">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="sidebar.js"></script>
+</body>
+</html>

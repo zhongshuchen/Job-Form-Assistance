@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "求职助理",
+    "description": "扩展名称"
+  },
+  "extDescription": {
+    "message": "使用预先准备好的文本片段快速填写求职申请表单",
+    "description": "扩展描述"
+  },
+  "extTitle": {
+    "message": "打开求职助理",
+    "description": "扩展动作标题"
+  }
+}

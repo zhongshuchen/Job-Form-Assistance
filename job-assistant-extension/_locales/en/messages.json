@@ -1,0 +1,14 @@
+{
+  "extName": {
+    "message": "Job Application Assistant",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Quickly fill out job application forms with pre-prepared text snippets",
+    "description": "Extension description"
+  },
+  "extTitle": {
+    "message": "Open Job Application Assistant",
+    "description": "Extension action title"
+  }
+}
