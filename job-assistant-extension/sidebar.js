@@ -37,6 +37,60 @@
     }
     // Apply translations
     applyTranslations();
+
+    // Listen for storage changes from other tabs/sidebar instances
+    chrome.storage.onChanged.addListener((changes, areaName) => {
+      if (areaName !== 'local') return;
+
+      let needsRerender = false;
+
+      // Update materials if changed elsewhere
+      if (changes.materials) {
+        materials = changes.materials.newValue || [];
+        needsRerender = true;
+      }
+
+      // Update groups if changed elsewhere
+      if (changes.groups) {
+        groups = changes.groups.newValue || [];
+        needsRerender = true;
+      }
+
+      // Update settings if changed elsewhere
+      if (changes.settings) {
+        settings = changes.settings.newValue || { dateFormat: 'YYYY-MM-DD' };
+        needsRerender = true;
+        // Update date format display
+        const dateFormatText = document.getElementById('date-format-text');
+        if (dateFormatText) {
+          dateFormatText.textContent = settings.dateFormat;
+        }
+      }
+
+      // If a modal is open, check if the item being edited still exists
+      if (editingMaterialId !== null) {
+        const materialExists = materials.some(m => m.id === editingMaterialId);
+        if (!materialExists) {
+          alert(t('materialDeletedElsewhere'));
+          closeModals();
+          needsRerender = true;
+        }
+      }
+
+      if (editingGroupId !== null) {
+        const groupExists = groups.some(g => g.id === editingGroupId);
+        if (!groupExists) {
+          alert(t('groupDeletedElsewhere'));
+          closeModals();
+          needsRerender = true;
+        }
+      }
+
+      // Re-render if no modal is open, or if we just closed one due to deletion
+      if (needsRerender && editingMaterialId === null && editingGroupId === null) {
+        render();
+      }
+    });
   }
 
   // Load data from storage

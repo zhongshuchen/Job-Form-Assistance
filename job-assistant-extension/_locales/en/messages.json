@@ -10,5 +10,13 @@
   "extTitle": {
     "message": "Open Job Application Assistant",
     "description": "Extension action title"
+  },
+  "materialDeletedElsewhere": {
+    "message": "This material was deleted in another tab. The edit dialog will be closed.",
+    "description": "Alert message when material being edited is deleted in another tab"
+  },
+  "groupDeletedElsewhere": {
+    "message": "This group was deleted in another tab. The edit dialog will be closed.",
+    "description": "Alert message when group being edited is deleted in another tab"
   }
 }

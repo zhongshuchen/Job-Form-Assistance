@@ -10,5 +10,13 @@
   "extTitle": {
     "message": "打开求职助理",
     "description": "扩展动作标题"
+  },
+  "materialDeletedElsewhere": {
+    "message": "该材料已在另一个标签页中被删除，编辑对话框将关闭。",
+    "description": "当正在编辑的材料在另一个标签页被删除时显示的提示信息"
+  },
+  "groupDeletedElsewhere": {
+    "message": "该分组已在另一个标签页中被删除，编辑对话框将关闭。",
+    "description": "当正在编辑的分组在另一个标签页被删除时显示的提示信息"
   }
 }
