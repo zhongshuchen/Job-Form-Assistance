@@ -21,9 +21,14 @@
       <button id="add-group" class="btn btn-secondary">
         <span class="icon-plus"></span> <span data-i18n="newGroup">New Group</span>
       </button>
-      <button id="toggle-date-format" class="btn btn-text">
-        <span data-i18n="dateFormat">Date:</span> <span id="date-format-text">YYYY-MM-DD</span>
-      </button>
+      <div class="date-format-select">
+        <label for="date-format" data-i18n="dateFormat">Date:</label>
+        <select id="date-format">
+          <option value="YYYY">YYYY</option>
+          <option value="YYYY-MM">YYYY-MM</option>
+          <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+        </select>
+      </div>
     </div>
 
     <div id="groups-container" class="groups-container">
