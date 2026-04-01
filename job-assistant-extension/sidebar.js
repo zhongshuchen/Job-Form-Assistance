@@ -17,7 +17,7 @@
   const emptyState = document.getElementById('empty-state');
   const closeSidebarBtn = document.getElementById('close-sidebar');
   const addGroupBtn = document.getElementById('add-group');
-  const toggleDateFormatBtn = document.getElementById('toggle-date-format');
+  const dateFormatSelect = document.getElementById('date-format');
 
   // Classification regex patterns
   const patterns = {
@@ -31,10 +31,9 @@
     await loadData();
     render();
     setupEventListeners();
-    // Initialize date format button text
-    const dateBtn = document.getElementById('toggle-date-format');
-    if (dateBtn) {
-      dateBtn.innerHTML = `<span data-i18n="dateFormat">${t('dateFormat')}</span> <span id="date-format-text">${settings.dateFormat}</span>`;
+    // Set initial date format selection
+    if (dateFormatSelect) {
+      dateFormatSelect.value = settings.dateFormat;
     }
     // Apply translations
     applyTranslations();
@@ -96,14 +95,27 @@
 
   // Format date according to current setting
   function formatDate(content) {
-    if (settings.dateFormat === 'YYYY-MM') {
-      // If content is YYYY-MM-DD, convert to YYYY-MM
-      const match = content.match(/^(\d{4})[\-\/](\d{2})[\-\/]\d{2}$/);
-      if (match) {
-        return `${match[1]}-${match[2]}`;
-      }
+    // Parse the original date components
+    const parts = content.match(/^(\d{4})(?:[\-\/](\d{2}))?(?:[\-\/](\d{2}))?$/);
+
+    if (!parts) {
+      return content;
     }
-    return content;
+
+    const year = parts[1];
+    const month = parts[2] || '01';
+    const day = parts[3] || '01';
+
+    // Build the output based on selected format
+    switch (settings.dateFormat) {
+      case 'YYYY':
+        return year;
+      case 'YYYY-MM':
+        return `${year}-${month}`;
+      case 'YYYY-MM-DD':
+      default:
+        return `${year}-${month}-${day}`;
+    }
   }
 
   // Apply translations to static elements
@@ -311,7 +323,8 @@
   // Create material HTML
   function createMaterialHtml(material) {
     const type = material.type || classifyContent(material.content);
-    const displayContent = type === 'date' ? formatDate(material.content) : material.content;
+    // Always display original content in the panel (never format for display)
+    const displayContent = material.content;
     const translatedType = translateType(type);
 
     return `
@@ -357,11 +370,13 @@
       draggedItem = material;
       item.classList.add('dragging');
       e.dataTransfer.effectAllowed = 'copy';
-      e.dataTransfer.setData('text/plain', material.content);
+      // For date materials, apply formatting before drag
+      const dragContent = material.type === 'date' ? formatDate(material.content) : material.content;
+      e.dataTransfer.setData('text/plain', dragContent);
       // Notify content script that drag started
       window.parent.postMessage({
         action: 'dragStart',
-        text: material.content
+        text: dragContent
       }, '*');
     });
 
@@ -654,16 +669,13 @@
     editingGroupId = null;
   }
 
-  // Toggle date format
-  function toggleDateFormat() {
-    settings.dateFormat = settings.dateFormat === 'YYYY-MM-DD' ? 'YYYY-MM' : 'YYYY-MM-DD';
+  // Handle date format change
+  function handleDateFormatChange() {
+    settings.dateFormat = dateFormatSelect.value;
     saveSettings();
-    render();
-    // Update button text to show current format
-    const dateFormatText = document.getElementById('date-format-text');
-    if (dateFormatText) {
-      dateFormatText.textContent = settings.dateFormat;
-    }
+    // Only need to save settings - no need to re-render because
+    // requirements state panel should keep showing original content
+    // So we don't call render()
   }
 
   // Escape HTML
@@ -683,8 +695,8 @@
     // Add buttons - global one removed, now handled per group
     addGroupBtn.addEventListener('click', () => openGroupModal());
 
-    // Toggle date format
-    toggleDateFormatBtn.addEventListener('click', toggleDateFormat);
+    // Date format selection
+    dateFormatSelect.addEventListener('change', handleDateFormatChange);
 
     // Modal close buttons
     document.querySelectorAll('.modal-close').forEach(btn => {

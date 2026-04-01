@@ -124,8 +124,40 @@ body {
   background: white;
   border-bottom: 1px solid #e5e7eb;
   display: flex;
-  gap: 8px;
+  gap: 12px;
   flex-shrink: 0;
+  align-items: center;
+}
+
+/* Date format select */
+.date-format-select {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.date-format-select label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.date-format-select select {
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.date-format-select select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 /* Groups Container */

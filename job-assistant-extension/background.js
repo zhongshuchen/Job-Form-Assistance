@@ -18,7 +18,7 @@ chrome.runtime.onInstalled.addListener(() => {
     if (!result.settings) {
       chrome.storage.local.set({
         settings: {
-          dateFormat: 'YYYY-MM-DD' // or 'YYYY-MM'
+          dateFormat: 'YYYY-MM-DD' // or 'YYYY-MM', 'YYYY'
         }
       });
     }
