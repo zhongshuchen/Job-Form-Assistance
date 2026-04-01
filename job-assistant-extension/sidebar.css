@@ -93,8 +93,8 @@ body {
   height: 32px;
   border: none;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: #f3f4f6;
+  color: #374151;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -103,7 +103,7 @@ body {
 }
 
 .btn-icon:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #e5e7eb;
 }
 
 .btn-text {
