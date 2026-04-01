@@ -2,12 +2,12 @@
 const i18n = {
   en: {
     // Header
-    appTitle: 'Job Assistant',
+    appTitle: 'Application Form Assistant',
     close: 'Close',
 
     // Toolbar
     newGroup: 'New Group',
-    dateFormat: 'Date:',
+    dateFormat: 'Pasted Date By:',
 
     // Empty state
     emptyState: 'No materials yet. Create your first group and material!',
@@ -61,12 +61,12 @@ const i18n = {
 
   zh: {
     // Header
-    appTitle: '求职助手',
+    appTitle: '网申填写助手',
     close: '关闭',
 
     // Toolbar
     newGroup: '新建分组',
-    dateFormat: '日期：',
+    dateFormat: '日期粘贴为：',
 
     // Empty state
     emptyState: '暂无材料。创建你的第一个分组和材料吧！',
