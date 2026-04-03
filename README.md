@@ -19,9 +19,9 @@
 
 ## 安装方式
 
-### 从 Chrome 网上应用店安装（待上架）
+### 从网上应用店安装
 
-*敬请期待*
+[Chrome 应用商店](https://chromewebstore.google.com/detail/epggkabcadgpjlnamimpjjpfokpjmpod?utm_source=item-share-cb) | [Edge 扩展商店]（Coming Soon）
 
 ### 开发者模式加载（手动安装）
 

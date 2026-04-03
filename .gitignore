@@ -21,3 +21,8 @@ Thumbs.db
 
 # Project files
 .others/
+
+# Chrome files
+*.crx
+*.pem
+*.zip
